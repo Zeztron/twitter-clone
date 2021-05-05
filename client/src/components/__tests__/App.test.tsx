@@ -1,9 +1,15 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { shallow, ShallowWrapper } from 'enzyme';
 import App from '../App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+const setup = () => shallow(<App />);
+
+describe('<App />', () => {
+  let wrapper: ShallowWrapper;
+
+  beforeEach(() => (wrapper = setup()));
+
+  it('successfully renders App component', () => {
+    expect(wrapper).toHaveLength(1);
+  });
 });
