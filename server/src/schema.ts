@@ -41,6 +41,13 @@ const Query = objectType({
       },
     })
 
+    t.list.field('users', {
+      type: 'User',
+      resolve: (parent, args, context: Context) => {
+        return context.prisma.user.findMany()
+      },
+    })
+
     t.nullable.field('postById', {
       type: 'Post',
       args: {
@@ -66,11 +73,11 @@ const Query = objectType({
       resolve: (_parent, args, context: Context) => {
         const or = args.searchString
           ? {
-            OR: [
-              { title: { contains: args.searchString } },
-              { content: { contains: args.searchString } },
-            ],
-          }
+              OR: [
+                { title: { contains: args.searchString } },
+                { content: { contains: args.searchString } },
+              ],
+            }
           : {}
 
         return context.prisma.post.findMany({
