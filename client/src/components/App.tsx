@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 import Users from './Users';
 import Landing from './Landing';
 import Signup from '../pages/Signup';
+import Login from '../pages/Login';
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000' });
 const authLink = setContext(async (req, { headers }) => {
@@ -38,6 +39,9 @@ const App: React.FC = () => {
           </Route>
           <Route exact path='/signup'>
             <Signup />
+          </Route>
+          <Route exact path='/login'>
+            <Login />
           </Route>
           <Route path='/landing'>
             <Landing />
